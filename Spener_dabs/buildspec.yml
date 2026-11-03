@@ -1,3 +1,4 @@
+```yaml
 version: 0.2
 
 env:
@@ -10,17 +11,25 @@ env:
     DATABRICKS_CLIENT_SECRET: "CICD/DATABRICKS_CLIENT_SECRET"
 
 phases:
+
   install:
+    runtime-versions:
+      python: 3.11
+
     commands:
-      - echo "Installing Databricks CLI"
+      - echo "Installing required dependencies"
+      - apt-get update
+      - apt-get install -y curl
+      - curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+      - databricks version
 
   pre_build:
     commands:
-      - echo "Validating Databricks authentication"
-      - databricks auth describe
+      - echo "Validating Databricks Asset Bundle"
+      - databricks bundle validate -t $TARGET
 
   build:
     commands:
       - echo "Deploying Databricks Asset Bundle"
-      - databricks bundle validate -t $TARGET
       - databricks bundle deploy -t $TARGET
+```
