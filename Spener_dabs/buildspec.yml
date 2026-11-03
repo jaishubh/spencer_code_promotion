@@ -1,0 +1,26 @@
+version: 0.2
+
+env:
+  variables:
+    TARGET: "dev"
+
+  secrets-manager:
+    DATABRICKS_HOST: "CICD/DEV_DATABRICKS_HOST"
+    DATABRICKS_CLIENT_ID: "CICD/DEV_DATABRICKS_CLIENT_ID"
+    DATABRICKS_CLIENT_SECRET: "CICD/DATABRICKS_CLIENT_SECRET"
+
+phases:
+  install:
+    commands:
+      - echo "Installing Databricks CLI"
+
+  pre_build:
+    commands:
+      - echo "Validating Databricks authentication"
+      - databricks auth describe
+
+  build:
+    commands:
+      - echo "Deploying Databricks Asset Bundle"
+      - databricks bundle validate -t $TARGET
+      - databricks bundle deploy -t $TARGET
