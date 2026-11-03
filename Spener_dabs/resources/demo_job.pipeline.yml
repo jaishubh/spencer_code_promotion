@@ -1,0 +1,14 @@
+resources:
+  pipelines:
+    demo_job:
+      name: demo_job
+      libraries:
+        - glob:
+            include: ../src/demo_job/transformations/**
+      catalog: workspace
+      channel: CURRENT
+      continuous: false
+      photon: true
+      root_path: ../src/demo_job
+      schema: default
+      serverless: true
