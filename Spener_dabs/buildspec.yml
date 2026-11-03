@@ -27,4 +27,3 @@ phases:
     commands:
       - echo "Deploying Databricks Asset Bundle"
       - databricks bundle deploy -t $TARGET
-```
