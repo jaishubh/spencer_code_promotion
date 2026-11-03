@@ -1,1 +1,21 @@
-
+resources:
+  jobs:
+    new_job_2026_09_21_23_54_11:
+      name: New Job 2026-09-21 23:54:11
+      tasks:
+        - task_key: run2
+          disabled: false
+          email_notifications: {}
+          notebook_task:
+            notebook_path: ../src/new_job_2026_09_21_23_54_11/gitlab.ipynb
+            source: WORKSPACE
+          run_if: ALL_SUCCESS
+          timeout_seconds: 0
+      email_notifications:
+        no_alert_for_skipped_runs: false
+      max_concurrent_runs: 1
+      performance_target: PERFORMANCE_OPTIMIZED
+      queue:
+        enabled: true
+      timeout_seconds: 0
+      webhook_notifications: {}
